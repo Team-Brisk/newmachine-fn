@@ -9,8 +9,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #000000;
   }
 }
 
@@ -18,4 +18,13 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+@font-face {
+  font-family: "TT-HovesPro-TrialRegular";
+  src: url("/fonts/TT-HovesPro-TrialRegular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "TT-Hoves Pro-Trial-Bold";
+  src: url("/fonts/TT-Hoves Pro-Trial-Bold.ttf") format("truetype");
 }

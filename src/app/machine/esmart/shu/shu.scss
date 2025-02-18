@@ -1,0 +1,105 @@
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fafafa;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Filter Section */
+  .filter-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .filter-card .MuiTextField-root,
+  .filter-card .MuiSelect-root {
+    margin-bottom: 15px;
+  }
+  
+  /* Data Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f9;
+    font-weight: bold;
+  }
+  
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .table-row {
+    transition: background-color 0.3s ease;
+  }
+  
+/* Pagination */
+.MuiPagination-root {
+    margin-top: 30px; /* Space it out a bit more */
+    font-size: 1.1rem;
+    color: #333;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .MuiPaginationItem-root {
+    margin: 0 5px;
+    font-weight: bold;
+    color: #007bff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  /* Hover effect */
+  .MuiPaginationItem-root:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    color: #0056b3;
+  }
+  
+  /* Active page styles */
+  .MuiPaginationItem-root.Mui-selected {
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    transform: scale(1.1); /* Highlight the active page with a slight zoom */
+  }
+  
+  /* First and Last button styling */
+  .MuiPaginationItem-previous, .MuiPaginationItem-next {
+    padding: 10px 15px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .MuiPaginationItem-previous:hover, .MuiPaginationItem-next:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  

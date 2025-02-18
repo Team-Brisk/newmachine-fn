@@ -1,0 +1,148 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    gap: 30px;
+    padding: 30px 0;
+}
+
+.container-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .title-01 {
+        font-size: 50px;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+.contain-select-site {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .MuiFormControl-root {
+        width: 500px;
+    }
+
+    .MuiSelect-root {
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #f4f4f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .MuiInputLabel-root {
+        color: #333;
+    }
+}
+
+.step2-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+
+    .esmart,
+    .aai {
+        display: flex;
+        flex-direction: row;
+        gap: 120px;
+    }
+
+    .esmart {
+        display: flex;
+        gap: 120px;
+        justify-content: center;
+        align-items: center; /* Center cards vertically */
+      
+        .shu-card, .srm-card {
+          background-color: white;
+          border-radius: 12px;
+          width: 300px;
+          height: 120px;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+          transition: transform 0.3s, box-shadow 0.3s;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          text-align: center;
+          padding: 20px;
+          transition: all 0.3s ease;
+          
+          &:hover {
+            transform: translateY(-15px); /* Lift card on hover */
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+          }
+        }
+      
+        .shu-card {
+          background-color: #dedede; /* Orange color for SHU */
+          color: #696969;
+      
+          .card-content h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+          }
+      
+          &:hover {
+            background-color: rgb(241, 135, 35); /* Darker orange on hover */
+            color: white;
+          }
+        }
+      
+        .srm-card {
+          background-color: #dedede; /* Blue color for SRM */
+          color: #696969;
+      
+          .card-content h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+          }
+      
+          &:hover {
+            background-color: #313131; /* Darker blue on hover */
+            color: white;
+          }
+        }
+      }
+      
+    .aai {
+        justify-content: center;
+        color: #333;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}
+
+button {
+    width: 200px;
+    padding: 12px 20px;
+    background-color: #ff7f00;
+    color: white;
+    border-radius: 8px;
+    text-transform: none;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        background-color: #e06b00;
+        transform: translateY(-2px);
+    }
+}
+
+button:focus {
+    outline: none;
+}
