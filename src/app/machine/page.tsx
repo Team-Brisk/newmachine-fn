@@ -1,6 +1,6 @@
 "use client";
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // Correct import for useRouter
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -12,7 +12,14 @@ import './machine.scss';
 export default function Machine() {
   const router = useRouter();
   const [site, setSite] = useState<string>("");
-
+  useEffect(() => {
+    const token = localStorage.getItem("token-nemachine");
+    const user = localStorage.getItem("user-nemachine");
+    if (!token ||  !user) {
+      localStorage.clear();
+      router.push("/login");
+    }
+  }, [router]);
   const handleChange = (event: SelectChangeEvent) => {
     setSite(event.target.value); // Keep value as string
     console.log(event.target.value);

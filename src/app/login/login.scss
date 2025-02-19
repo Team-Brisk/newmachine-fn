@@ -18,17 +18,18 @@ body, html {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: $primary-color;
+  background-color: $text-color;
   color: $text-color;
 }
 
 .form-container {
-  background-color: $secondary-color;
+  background-color: #f8f8f8;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   width: 90%;
   max-width: 400px;
+  color: #000;
 }
 
 .title {
@@ -44,7 +45,7 @@ body, html {
   background-color: transparent;
   border: 2px solid $text-color;
   border-radius: 4px;
-  color: $text-color;
+  color: #000;
   font-size: 16px;
 
   &:focus {
@@ -58,7 +59,7 @@ body, html {
   width: 100%;
   background-color: transparent;
   border: 2px solid $text-color;
-  color: $text-color;
+  color: #000;
   padding: 10px;
   font-weight: bold;
   border-radius: 4px;
@@ -67,6 +68,6 @@ body, html {
 
   &:hover {
     background-color: $text-color;
-    color: $secondary-color;
+    color: #000;
   }
 }

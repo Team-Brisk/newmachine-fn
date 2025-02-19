@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Box, TextField, MenuItem, Select, InputLabel, FormControl, Button, Pagination } from '@mui/material';
 import moment from 'moment';
 import './shu.scss';
+import { useRouter } from 'next/navigation';
 
 export default function ShuPage() {
   const [data, setData] = useState<any[]>([]);
@@ -16,7 +17,16 @@ export default function ShuPage() {
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [filterOptions, setFilterOptions] = useState<any>({}); // Store filter options
+  const router = useRouter();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token-nemachine");
+    const user = localStorage.getItem("user-nemachine");
+    if (!token ||  !user) {
+      localStorage.clear();
+      router.push("/login");
+    }
+  }, [router]);
   // Fetch data
   const fetchData = async () => {
     const params = {
@@ -36,7 +46,7 @@ export default function ShuPage() {
       setTotalPages(response.data.totalPages);
       setFilterOptions(response.data.filter); // Save the filter options from the response
     } catch (error) {
-      console.error('Error fetching data:', error);
+      
     }
   };
 

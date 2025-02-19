@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 import './login.scss'; // Import the SCSS file
 
@@ -8,7 +8,14 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter()
-
+  useEffect(() => {
+    const token = localStorage.getItem("token-nemachine");
+    const user = localStorage.getItem("user-nemachine");
+    if (!token ||  !user) {
+      localStorage.clear();
+      router.push("/login");
+    }
+  }, [router]);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
@@ -18,11 +25,11 @@ export default function Login() {
         password
       });
       localStorage.setItem('user-nemachine', JSON.stringify(response.data.user));
-      localStorage.setItem('token-nemachine', JSON.stringify(response.data.token));
+      localStorage.setItem('token-nemachine', response.data.token);
       console.log('Login successful:', response.data);
       router.push('/machine'); // Redirect to the dashboard page on successful login
     } catch (error: any) {
-    
+
     }
   };
 
