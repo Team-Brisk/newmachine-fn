@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Typography, Grid, Card, CardContent, CircularProgress } from "@mui/material";
-import "./dashboard.scss";
+import style from "./dashboard.module.scss";
 
 export default function Home() {
   const router = useRouter();
@@ -24,30 +24,30 @@ export default function Home() {
 
   if (loading) {
     return (
-      <Box className="dashboard-container">
+      <Box className= { style.dashboardcontainer }>
         <CircularProgress />
       </Box>
     );
   }
 
   return (
-    <Box className="dashboard-container">
-      <Typography variant="h4" className="dashboard-title">
+    <Box className= { style.dashboardcontainer }>
+      <Typography variant="h4" className={style.dashboardtitle}>
          Dashboard
       </Typography>
 
-      <Typography variant="h6" className="welcome-text">
+      <Typography variant="h6" className={style.welcometext}>
         สวัสดี, {user?.name || "Guest"} 
       </Typography>
 
-      <Grid container spacing={3} className="dashboard-grid">
+      <Grid container spacing={3} className={style.dashboardgrid}>
         <Grid item xs={12} sm={6} md={4}>
-          <Card className="dashboard-card">
+          <Card className={style.dashboardcard}>
             <CardContent>
-              <Typography variant="h6" className="card-title">
+              <Typography variant="h6" className={style.cardtitle}>
                  PM Check List
               </Typography>
-              <Typography variant="body2" className="card-desc">
+              <Typography variant="body2" className={style.carddesc}>
                 จัดการและตรวจสอบ PM Check List ของคุณได้ที่นี่
               </Typography>
             </CardContent>
@@ -55,12 +55,12 @@ export default function Home() {
         </Grid>
 
         <Grid item xs={12} sm={6} md={4}>
-          <Card className="dashboard-card">
+          <Card className={style.dashboardcard}>
             <CardContent>
-              <Typography variant="h6" className="card-title">
+              <Typography variant="h6" className={style.cardtitle}>
                  Machine Overview
               </Typography>
-              <Typography variant="body2" className="card-desc">
+              <Typography variant="body2" className= {style.carddesc}>
                 ดูรายละเอียดของเครื่องจักรทั้งหมดในระบบ
               </Typography>
             </CardContent>
@@ -68,12 +68,12 @@ export default function Home() {
         </Grid>
 
         <Grid item xs={12} sm={6} md={4}>
-          <Card className="dashboard-card">
+          <Card className={style.dashboardcard}>
             <CardContent>
-              <Typography variant="h6" className="card-title">
+              <Typography variant="h6" className={style.cardtitle}>
                  Maintenance Status
               </Typography>
-              <Typography variant="body2" className="card-desc">
+              <Typography variant="body2" className={style.carddesc}>
                 ตรวจสอบสถานะการบำรุงรักษาและแจ้งเตือน
               </Typography>
             </CardContent>

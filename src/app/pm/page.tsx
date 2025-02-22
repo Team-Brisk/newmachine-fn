@@ -1,8 +1,8 @@
 "use client";
 import * as React from "react";
 import { useState, useEffect } from "react";
-import "./pm.scss";
 import { useRouter } from "next/navigation";
+import { Box, Typography, Paper, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 interface IPmForm {
     _id: string;
@@ -25,11 +25,12 @@ export default function Pm() {
     useEffect(() => {
         const token = localStorage.getItem("token-nemachine");
         const user = localStorage.getItem("user-nemachine");
-        if (!token ||  !user) {
-          localStorage.clear();
-          router.push("/login");
+        if (!token || !user) {
+            localStorage.clear();
+            router.push("/login");
         }
-      }, [router]);
+    }, [router]);
+
     const fetchData = async () => {
         const token = localStorage.getItem("token-nemachine");
         if (!token) {
@@ -40,9 +41,7 @@ export default function Pm() {
         try {
             const response = await fetch("http://159.65.216.202:9999/pm/mine", {
                 method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
             });
 
             if (!response.ok) {
@@ -74,9 +73,7 @@ export default function Pm() {
         try {
             const response = await fetch(`http://159.65.216.202:9999/pm/file/${fileName}`, {
                 method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
             });
 
             if (response.ok) {
@@ -103,9 +100,7 @@ export default function Pm() {
         try {
             const response = await fetch(`http://159.65.216.202:9999/pm/files/${pdfName}`, {
                 method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
             });
 
             if (!response.ok) {
@@ -122,76 +117,132 @@ export default function Pm() {
     };
 
     return (
-        <div className="container">
-            <div className="header">
-                <h2> PM Check List</h2>
-            </div>
+        <Box sx={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            padding: "20px",
+            display: "flex",
+            flexDirection: "column",
+        }}>
+            {/* Header */}
+            <Box sx={{
+                background: "linear-gradient(135deg, #ff7000, #ff9900)",
+                padding: "15px",
+                color: "white",
+                textAlign: "center",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                borderRadius: "8px",
+                marginBottom: "20px",
+            }}>
+                PM Check List
+            </Box>
 
-            {/* ✅ รายการไฟล์ PDF */}
-            <div className="file-list">
+            {/* File List */}
+            <Paper sx={{ padding: "15px", borderRadius: "10px", boxShadow: 3 }}>
                 {myPdf.length > 0 ? (
-                    <ul>
-                        {myPdf.map((pdf) => (
-                            <li key={pdf._id} className="file-item">
-                                <div className="file-info">
-                                    <span className="file-name" onClick={() => handleOpenPdf(pdf.pdfName)}>
-                                        📂 {pdf.pdfName}
-                                    </span>
-                                    <div className="file-meta">
-                                         {new Date(pdf.uploadAt).toLocaleString()} | 👤 {pdf.uploadBy}
-                                    </div>
-                                    {/* ✅แสดงเครื่องจักรที่อยู่ในไฟล์ */}
-                                    {pdf.machine && Object.keys(pdf.machine).length > 0 && (
-                                        <div className="machine-list">
-                                            🏭 <strong>เครื่องจักร:</strong>{" "}
-                                            {Object.entries(pdf.machine).map(([machine, id]) => (
-                                                <span key={id} className="machine-item">
-                                                    {machine}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="file-actions">
-                                    <button className="btn btn-open" onClick={() => handleOpenPdf(pdf.pdfName)}>
-                                        เปิด
-                                    </button>
-                                    <button className="btn btn-delete" onClick={() => handleDelete(pdf.pdfName)}>
-                                        ลบ
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>❌ ไม่มีไฟล์ PM Check List</p>
-                )}
-            </div>
+                    myPdf.map((pdf) => (
+                        <Box key={pdf._id} sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            borderBottom: "1px solid #ddd",
+                            padding: "10px 0",
+                            transition: "all 0.3s",
+                            "&:hover": { background: "#f5f5f5" }
+                        }}>
+                            <Box sx={{ flexGrow: 1 }}>
+                                <Typography
+                                    variant="h6"
+                                    sx={{ cursor: "pointer", color: "#007bff", fontWeight: "bold" }}
+                                    onClick={() => handleOpenPdf(pdf.pdfName)}
+                                >
+                                    📂 {pdf.pdfName}
+                                </Typography>
+                                <Typography variant="body2" sx={{ color: "#666" }}>
+                                    {new Date(pdf.uploadAt).toLocaleString()} | 👤 {pdf.uploadBy}
+                                </Typography>
+                                {pdf.machine && Object.keys(pdf.machine).length > 0 && (
+                                    <Box sx={{ marginTop: "5px", color: "#333" }}>
+                                        🏭 <strong>เครื่องจักร:</strong>{" "}
+                                        {Object.entries(pdf.machine).map(([machine, id]) => (
+                                            <Typography key={id} component="span" sx={{
+                                                background: "#e2e2e2",
+                                                padding: "3px 8px",
+                                                borderRadius: "5px",
+                                                marginRight: "5px",
+                                                fontSize: "12px",
+                                            }}>
+                                                {machine}
+                                            </Typography>
+                                        ))}
+                                    </Box>
+                                )}
+                            </Box>
+                            <Box sx={{ display: "flex", gap: "10px" }}>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        background: "linear-gradient(135deg, #28a745, #45c657)",
+                                        color: "white",
+                                        "&:hover": {
+                                            background: "linear-gradient(135deg, #218838, #3ebd4d)",
+                                            transform: "scale(1.05)",
+                                        }
+                                    }}
+                                    onClick={() => handleOpenPdf(pdf.pdfName)}
+                                >
+                                    เปิด
+                                </Button>
 
-            {/* ✅ แสดงจำนวนเครื่องจักรที่มีการเช็ค PM */}
-            <div className="machine-count">
-                <h3>📊 รายงาน PM Check List ต่อเครื่องจักร</h3>
-                {Object.keys(machineCount).length > 0 ? (
-                    <table className="summary-table">
-                        <thead>
-                            <tr>
-                                <th>🏭 เครื่องจักร</th>
-                                <th>📄 จำนวนไฟล์</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.entries(machineCount).map(([machine, count]) => (
-                                <tr key={machine}>
-                                    <td>{machine}</td>
-                                    <td>{count} ไฟล์</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        background: "linear-gradient(135deg, #dc3545, #ff5c6c)",
+                                        color: "white",
+                                        "&:hover": {
+                                            background: "linear-gradient(135deg, #c82333, #ff444e)",
+                                            transform: "scale(1.05)",
+                                        }
+                                    }}
+                                    onClick={() => handleDelete(pdf.pdfName)}
+                                >
+                                    ลบ
+                                </Button>
+                            </Box>
+                        </Box>
+                    ))
                 ) : (
-                    <p>ไม่มีข้อมูลการเช็ค PM ต่อเครื่องจักร</p>
+                    <Typography>❌ ไม่มีไฟล์ PM Check List</Typography>
                 )}
-            </div>
-        </div>
+            </Paper>
+
+            {/* Machine Count Summary */}
+            <Box sx={{ marginTop: "20px" }}>
+                <Typography variant="h5">📊 รายงาน PM Check List ต่อเครื่องจักร</Typography>
+                {Object.keys(machineCount).length > 0 ? (
+                    <TableContainer component={Paper} sx={{ marginTop: "15px", borderRadius: "8px", boxShadow: 3 }}>
+                        <Table>
+                            <TableHead>
+                                <TableRow sx={{ backgroundColor: "#f4f4f9" }}>
+                                    <TableCell>🏭 เครื่องจักร</TableCell>
+                                    <TableCell>📄 จำนวนไฟล์</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {Object.entries(machineCount).map(([machine, count]) => (
+                                    <TableRow key={machine}>
+                                        <TableCell>{machine}</TableCell>
+                                        <TableCell>{count} ไฟล์</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                ) : (
+                    <Typography>ไม่มีข้อมูลการเช็ค PM ต่อเครื่องจักร</Typography>
+                )}
+            </Box>
+        </Box>
     );
 }

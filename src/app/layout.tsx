@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import DrawerLayout from "./components/DrawerLayout";
+import { CssBaseline } from "@mui/material"; // ✅ Import MUI CssBaseline
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,11 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-          <DrawerLayout>{children}</DrawerLayout>
-     
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <CssBaseline /> {/* ✅ ใช้ CssBaseline ของ MUI */}
+        <DrawerLayout>{children}</DrawerLayout>
       </body>
     </html>
   );

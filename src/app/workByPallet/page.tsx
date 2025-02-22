@@ -11,16 +11,16 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Badge,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
-    CircularProgress
+    CircularProgress,
+    Chip,
+    Typography
 } from "@mui/material";
 import axios from "axios";
 import moment from "moment";
-import styles from "./styles.module.scss"; // Import SCSS file for custom styles
 
 export default function WorkByPalletPage() {
     const [data, setData] = useState([]);
@@ -29,7 +29,8 @@ export default function WorkByPalletPage() {
     const [openModal, setOpenModal] = useState(false);
     const [modalData, setModalData] = useState<any>(null);
     const [searchTerm, setSearchTerm] = useState("");
-    const [SHUstatus, setSHUStatus] = useState<any[]>([])
+    const [SHUstatus, setSHUStatus] = useState<any[]>([]);
+
     const handleRowClick = (palletId: string) => {
         const selectedData = data.find((item: any) => item._id.palletId === palletId);
         setModalData(selectedData);
@@ -49,64 +50,72 @@ export default function WorkByPalletPage() {
             setLoading(false);
         }
     };
+
     const fetchSHUStatus = async () => {
         try {
-            const res = await fetch(`http://159.65.216.202:9999/machine/shu/status`).then((res) => res.json())
-            setSHUStatus(res.status)
- 
-                
+            const res = await fetch(`http://159.65.216.202:9999/machine/shu/status`).then((res) => res.json());
+            setSHUStatus(res.status);
         } catch (error) {
-          
-        } finally {
-            console.log('Fetching SHU status complete', SHUstatus.length)
+            console.error("Error fetching SHU status:", error);
         }
-    }
+    };
+
     useEffect(() => {
         fetchData();
         fetchSHUStatus();
     }, [date]);
 
-    const formatJobStatus = (status: any) => {
+    const formatJobStatus = (status: number): { label: string; color: "default" | "primary" | "secondary" | "error" | "info" | "success" | "warning" } => {
         switch (status) {
             case 99:
-                return { label: "จบงาน", className: styles.completed };
+                return { label: "จบงาน", color: "success" }; // ✅ ใช้ "success" ที่รองรับ
             case 1:
-                return { label: "กำลังทำงาน", className: styles.inProgress };
+                return { label: "กำลังทำงาน", color: "warning" }; // ✅ ใช้ "warning" ที่รองรับ
             default:
-                return { label: "ไม่มีงาน", className: styles.notAvailable };
+                return { label: "ไม่มีงาน", color: "default" }; // ✅ ใช้ "default" ที่รองรับ
         }
     };
+    
 
     const handleCloseModal = () => {
         setOpenModal(false);
         setModalData(null);
     };
 
-    // 🔍 ค้นหา Pallet ID และเรียงลำดับล่าสุดก่อน
     const filteredData = data
         .filter((item: any) => item._id?.palletId?.toLowerCase().includes(searchTerm.toLowerCase()))
         .sort((a: any, b: any) => moment(b.data[b.data.length - 1]?.timestamp).valueOf() - moment(a.data[a.data.length - 1]?.timestamp).valueOf());
 
     return (
-        <Box className={styles.container}>
-            <h1 className={styles.title}>งานตามพาเลท</h1>
+        <Box sx={{
+            padding: "24px",
+            backgroundColor: "#f9f9f9",
+            borderRadius: "10px",
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: "1200px",
+            margin: "auto",
+        }}>
+            <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "center", marginBottom: "20px", color: "#333" }}>
+                งานตามพาเลท
+            </Typography>
 
-            <Box className={styles.datePickerContainer}>
+            {/* Date Picker */}
+            <Box sx={{ display: "flex", gap: "16px", marginBottom: "20px", alignItems: "center", justifyContent: "center" }}>
                 <TextField
                     label="เลือกวันที่"
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     InputLabelProps={{ shrink: true }}
-                    className={styles.datePicker}
                 />
-                <Button variant="contained" className={styles.fetchButton} onClick={fetchData}>
+                <Button variant="contained" sx={{ backgroundColor: "#414141", color: "white", "&:hover": { backgroundColor: "#0d47a1" } }} onClick={fetchData}>
                     ค้นหาข้อมูล
                 </Button>
             </Box>
 
-            {/* 🔍 ช่องค้นหา Pallet ID */}
-            <Box className={styles.searchContainer}>
+            {/* Search Bar */}
+            <Box sx={{ width: "40%", margin: "0 auto", marginBottom: "30px" }}>
                 <TextField
                     label="ค้นหา Pallet ID"
                     variant="outlined"
@@ -116,30 +125,30 @@ export default function WorkByPalletPage() {
                 />
             </Box>
 
-            {loading && <CircularProgress className={styles.loadingSpinner} />}
+            {loading && <CircularProgress sx={{ display: "block", margin: "auto" }} />}
 
             {!loading && filteredData.length > 0 && (
-                <TableContainer component={Paper} className={styles.tableContainer}>
+                <TableContainer component={Paper} sx={{ borderRadius: "12px", overflow: "hidden", boxShadow: 3 }}>
                     <Table>
-                        <TableHead className={styles.tableHead}>
+                        <TableHead sx={{ backgroundColor: "rgb(241, 135, 35)" }}>
                             <TableRow>
-                                <TableCell>รหัสพาเลท</TableCell>
-                                <TableCell>สถานะ</TableCell>
-                                <TableCell>ตำแหน่ง</TableCell>
-                                <TableCell>เวลาเริ่มต้น</TableCell>
-                                <TableCell>เวลาสิ้นสุด</TableCell>
+                                <TableCell sx={{ color: "white", fontWeight: "bold" }}>รหัสพาเลท</TableCell>
+                                <TableCell sx={{ color: "white", fontWeight: "bold" }}>สถานะ</TableCell>
+                                <TableCell sx={{ color: "white", fontWeight: "bold" }}>ตำแหน่ง</TableCell>
+                                <TableCell sx={{ color: "white", fontWeight: "bold" }}>เวลาเริ่มต้น</TableCell>
+                                <TableCell sx={{ color: "white", fontWeight: "bold" }}>เวลาสิ้นสุด</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {filteredData.map((item: any, index) => {
                                 const latestData = item.data[item.data.length - 1];
-                                const { label, className } = formatJobStatus(latestData.jobStatus);
+                                const { label, color } = formatJobStatus(latestData.jobStatus);
 
                                 return (
-                                    <TableRow key={index} className={styles.tableRow} onClick={() => handleRowClick(item._id.palletId)}>
+                                    <TableRow key={index} hover onClick={() => handleRowClick(item._id.palletId)}>
                                         <TableCell>{item._id.palletId}</TableCell>
                                         <TableCell>
-                                            <Badge className={className}>{label}</Badge>
+                                            <Chip label={label} color={color} />
                                         </TableCell>
                                         <TableCell>{latestData.location}</TableCell>
                                         <TableCell>{moment(item.data[0].timestamp).format("YYYY-MM-DD HH:mm:ss")}</TableCell>
@@ -154,13 +163,14 @@ export default function WorkByPalletPage() {
                 </TableContainer>
             )}
 
+            {/* Modal */}
             <Dialog open={openModal} onClose={handleCloseModal} maxWidth="lg" fullWidth>
                 <DialogTitle>รายละเอียดของพาเลท {modalData?._id?.palletId}</DialogTitle>
                 <DialogContent>
                     {modalData && (
-                        <TableContainer component={Paper} className={styles.modalTableContainer}>
+                        <TableContainer component={Paper} sx={{ marginTop: "15px", borderRadius: "10px", overflow: "hidden", boxShadow: 3 }}>
                             <Table>
-                                <TableHead className={styles.tableHead}>
+                                <TableHead sx={{ backgroundColor: "#f4f4f9" }}>
                                     <TableRow>
                                         <TableCell>เวลา</TableCell>
                                         <TableCell>รหัสพาเลท</TableCell>
@@ -176,21 +186,11 @@ export default function WorkByPalletPage() {
                                 </TableHead>
                                 <TableBody>
                                     {modalData.data.slice().reverse().map((subItem: any, idx: number, array: any[]) => {
-                                        const { label, className } = formatJobStatus(subItem.jobStatus);
-
-                                        let timeDiff = "--";
-                                        if (idx < array.length - 1) {
-                                            const currentTimestamp = moment(subItem.timestamp);
-                                            const nextTimestamp = moment(array[idx + 1].timestamp);
-                                            const diffSeconds = currentTimestamp.diff(nextTimestamp, 'seconds');
-
-                                            const minutes = Math.floor(diffSeconds / 60);
-                                            const seconds = diffSeconds % 60;
-                                            timeDiff = `${minutes} นาที ${seconds} วินาที`;
-                                        }
+                                        const { label, color } = formatJobStatus(subItem.jobStatus);
+                                        const statusDescription = SHUstatus.find((s) => s.no === subItem.statusNo)?.description || "ไม่พบข้อมูล";
 
                                         return (
-                                            <TableRow key={idx} className={styles.modalTableRow}>
+                                            <TableRow key={idx} hover>
                                                 <TableCell>{moment(subItem.timestamp).format("YYYY-MM-DD HH:mm:ss")}</TableCell>
                                                 <TableCell>{subItem.palletId}</TableCell>
                                                 <TableCell>{subItem.location}</TableCell>
@@ -199,12 +199,9 @@ export default function WorkByPalletPage() {
                                                 <TableCell>{subItem.curLevel}</TableCell>
                                                 <TableCell>{subItem.source}</TableCell>
                                                 <TableCell>
-                                                    <Badge className={className}>{label}</Badge>
+                                                    <Chip label={label} color={color} />
                                                 </TableCell>
-                                                <TableCell>
-                {SHUstatus.find((s) => s.no === subItem.statusNo)?.description || "ไม่พบข้อมูล"}
-            </TableCell>
-                                                <TableCell>{timeDiff}</TableCell>
+                                                <TableCell>{statusDescription}</TableCell>
                                             </TableRow>
                                         );
                                     })}

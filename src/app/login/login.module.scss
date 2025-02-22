@@ -3,17 +3,9 @@ $primary-color: #ff7f00; // Vibrant Orange
 $secondary-color: #000; // Black
 $text-color: #fff; // White
 
-* {
-  box-sizing: border-box;
-}
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
 
-.min-h-screen {
+.minhscreen {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +14,7 @@ body, html {
   color: $text-color;
 }
 
-.form-container {
+.formcontainer {
   background-color: #f8f8f8;
   padding: 2rem;
   border-radius: 8px;
@@ -38,7 +30,7 @@ body, html {
   margin-bottom: 2rem;
 }
 
-.input-field {
+.inputfield {
   width: 100%;
   padding: 10px;
   margin-bottom: 1.5rem;
@@ -55,7 +47,7 @@ body, html {
   }
 }
 
-.btn-primary {
+.btnprimary {
   width: 100%;
   background-color: transparent;
   border: 2px solid $text-color;

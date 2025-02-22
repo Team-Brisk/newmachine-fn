@@ -8,12 +8,12 @@
     padding: 30px 0;
 }
 
-.container-title {
+.containertitle {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .title-01 {
+    .title01 {
         font-size: 50px;
         font-weight: 600;
         color: #333;
@@ -22,7 +22,7 @@
     }
 }
 
-.contain-select-site {
+.containselectsite {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +44,7 @@
     }
 }
 
-.step2-select {
+.step2select {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,7 +64,7 @@
         justify-content: center;
         align-items: center; /* Center cards vertically */
       
-        .shu-card, .srm-card {
+        .shucard, .srmcard {
           background-color: white;
           border-radius: 12px;
           width: 300px;
@@ -85,11 +85,11 @@
           }
         }
       
-        .shu-card {
+        .shucard {
           background-color: #dedede; /* Orange color for SHU */
           color: #696969;
       
-          .card-content h3 {
+          .cardcontent h3 {
             font-size: 1.2rem;
             font-weight: bold;
             letter-spacing: 1px;
@@ -101,11 +101,11 @@
           }
         }
       
-        .srm-card {
+        .srmcard {
           background-color: #dedede; /* Blue color for SRM */
           color: #696969;
       
-          .card-content h3 {
+          .cardcontent h3 {
             font-size: 1.2rem;
             font-weight: bold;
             letter-spacing: 1px;
@@ -126,23 +126,23 @@
     }
 }
 
-button {
-    width: 200px;
-    padding: 12px 20px;
-    background-color: #ff7f00;
-    color: white;
-    border-radius: 8px;
-    text-transform: none;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+// button {
+//     width: 200px;
+//     padding: 12px 20px;
+//     background-color: #ff7f00;
+//     color: white;
+//     border-radius: 8px;
+//     text-transform: none;
+//     font-weight: 600;
+//     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//     transition: background-color 0.3s ease, transform 0.3s ease;
 
-    &:hover {
-        background-color: #e06b00;
-        transform: translateY(-2px);
-    }
-}
+//     &:hover {
+//         background-color: #e06b00;
+//         transform: translateY(-2px);
+//     }
+// }
 
-button:focus {
-    outline: none;
-}
+// button:focus {
+//     outline: none;
+// }

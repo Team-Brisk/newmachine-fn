@@ -3,6 +3,8 @@
     margin: 0 auto;
     padding: 20px;
     font-family: "Arial", sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -16,14 +18,14 @@
     margin-bottom: 20px;
 }
 
-.file-list {
+.filelist {
     background: white;
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.file-item {
+.fileitem {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,29 +34,29 @@
     transition: all 0.3s;
 }
 
-.file-item:hover {
+.fileitem:hover {
     background: #f5f5f5;
 }
 
-.file-name {
+.filename {
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
     color: #007bff;
 }
 
-.file-meta {
+.filemeta {
     font-size: 0.85rem;
     color: #666;
 }
 
-.machine-list {
+.machinelist {
     margin-top: 5px;
     font-size: 0.9rem;
     color: #333;
 }
 
-.machine-item {
+.machineitem {
     font-size: 10px;
     background: #e2e2e2;
     padding: 3px 8px;
@@ -62,14 +64,14 @@
     margin-right: 5px;
 }
 
-.summary-table {
+.summarytable {
     width: 100%;
     margin-top: 15px;
     border-collapse: collapse;
 }
 
-.summary-table th,
-.summary-table td {
+.summarytable th,
+.summarytable td {
     padding: 8px;
     border: 1px solid #ddd;
 }
@@ -92,31 +94,31 @@
 }
 
 /* ปุ่มเปิดไฟล์ */
-.btn-open {
+.btnopen {
     background: linear-gradient(135deg, #28a745, #45c657);
     color: white;
 }
 
-.btn-open:hover {
+.btnopen:hover {
     background: linear-gradient(135deg, #218838, #3ebd4d);
     box-shadow: 0 5px 12px rgba(40, 167, 69, 0.4);
     transform: scale(1.05);
 }
 
 /* ปุ่มลบไฟล์ */
-.btn-delete {
+.btndelete {
     background: linear-gradient(135deg, #dc3545, #ff5c6c);
     color: white;
 }
 
-.btn-delete:hover {
+.btndelete:hover {
     background: linear-gradient(135deg, #c82333, #ff444e);
     box-shadow: 0 5px 12px rgba(220, 53, 69, 0.4);
     transform: scale(1.05);
 }
 
 /* ปรับแต่ง action button container */
-.file-actions {
+.fileactions {
     display: flex;
     gap: 10px;
 }

@@ -3,6 +3,8 @@
   padding: 24px;
   background-color: #f9f9f9; /* พื้นหลังสีเทาอ่อน ดูสะอาด */
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -93,7 +95,7 @@
 .completed {
   background-color: #4caf50;
   color: white;
-  padding: 6px 12px;
+ 
   border-radius: 20px;
   font-weight: bold;
   text-align: center;
@@ -104,7 +106,7 @@
 .inProgress {
   background-color: #ff9800;
   color: white;
-  padding: 6px 12px;
+ 
   border-radius: 20px;
   font-weight: bold;
   text-align: center;
@@ -115,7 +117,7 @@
 .notAvailable {
   background-color: #9e9e9e;
   color: white;
-  padding: 6px 12px;
+
   border-radius: 20px;
   font-weight: bold;
   text-align: center;
@@ -123,12 +125,16 @@
   min-width: 100px;
 }
 
-.tableContainer table td, 
-.tableContainer table th {
+.tableContainer .table .td, 
+.tableContainer .table .th {
   padding: 12px;
   font-size: 16px;
 }
-
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
 
 /* 🔹 ให้ Modal แสดงผลตรงกลาง */
 .dialog {
