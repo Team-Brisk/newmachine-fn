@@ -18,11 +18,11 @@ jobs:
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /root/cicd/newmachine-fn
             git pull origin main
             cd /root/cicd
-            docker-compose build frontend
-            docker-compose up -d --no-deps frontend
+            docker-compose build newmachine-fn
+            docker-compose up -d --no-deps newmachine-fn
  
