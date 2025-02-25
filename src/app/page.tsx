@@ -98,7 +98,7 @@ export default function Home() {
                 textShadow: "0px 0px 10px rgb(255 137 0 / 60%)",
               }}
             >
-              BRISK
+              ZXXBRISK
             </Typography>
 
             <Typography
