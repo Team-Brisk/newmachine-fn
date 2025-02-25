@@ -61,7 +61,7 @@ export default function ShuPage() {
             setTotalPages(response.data.totalPages);
             setFilterOptions(response.data.filter);
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.log("Error fetching data:", error);
         }
     };
 
@@ -71,9 +71,8 @@ export default function ShuPage() {
 
     return (
         <Box sx={{
-            maxWidth: "1200px",
+            maxWidth: "1600px",
             margin: "0 auto",
-            padding: "20px",
             backgroundColor: "#fafafa",
             display: "flex",
             flexDirection: "column",
@@ -84,7 +83,7 @@ export default function ShuPage() {
             </Typography>
 
             {/* Filter Section */}
-            <Box sx={{ display: 'flex', gap: '20px', marginBottom: '30px', flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', gap: '20px', marginBottom: '30px', flexWrap: 'wrap', justifyContent:'center' }}>
                 <Paper sx={{ padding: "20px", borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", width: "300px" }}>
                     <TextField
                         label="Start Date"
@@ -183,9 +182,19 @@ export default function ShuPage() {
                             <TableCell><b>Unit Type</b></TableCell>
                             <TableCell><b>Weight</b></TableCell>
                             <TableCell><b>Location</b></TableCell>
-                            
-                            <TableCell><b>Command</b></TableCell>
+                            <TableCell><b>Curent Level</b></TableCell>
+                            <TableCell><b>Curent Bay</b></TableCell>
+                            <TableCell><b>Curent Bank</b></TableCell>
+                            <TableCell><b>Bank</b></TableCell>
+                            <TableCell><b>Bay</b></TableCell>
+                            <TableCell><b>Level</b></TableCell>
+                            <TableCell><b>Rack</b></TableCell>
+                            <TableCell><b>Job Status</b></TableCell>
+                            <TableCell><b>X</b></TableCell>
+                            <TableCell><b>Status</b></TableCell>
                             <TableCell><b>Status Description</b></TableCell>
+                            <TableCell><b>Command</b></TableCell>
+                            <TableCell><b>Command Description</b></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -196,8 +205,19 @@ export default function ShuPage() {
                                 <TableCell>{item.unitType}</TableCell>
                                 <TableCell>{item.weight}</TableCell>
                                 <TableCell>{item.location}</TableCell>
+                                <TableCell>{item.curLevel}</TableCell>
+                                <TableCell>{item.curBay}</TableCell>
+                                <TableCell>{item.curBank}</TableCell>
+                                <TableCell>{item.bay}</TableCell>
+                                <TableCell>{item.bank}</TableCell>
+                                <TableCell>{item.level}</TableCell>
+                                <TableCell>{item.rackType}</TableCell>
+                                <TableCell>{item.jobStatus}</TableCell>
+                                <TableCell>{item.x}</TableCell>
                                 <TableCell>{item.statusNo}</TableCell>
                                 <TableCell>{item.statusDescription}</TableCell>
+                                <TableCell>{item.cmdNo}</TableCell>
+                                <TableCell>{item.cmdDescription}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

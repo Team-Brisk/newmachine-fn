@@ -42,7 +42,6 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
         setIsAuthenticated(!!token && !!user);
     };
 
-    // ✅ ตรวจสอบ token/user ใหม่ทุกครั้งที่ router เปลี่ยนแปลง & localStorage เปลี่ยน
     useEffect(() => {
         checkAuth();
         window.addEventListener("storage", checkAuth);
@@ -52,133 +51,82 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
     const handleLogout = () => {
         localStorage.clear();
         setIsAuthenticated(false);
-        window.dispatchEvent(new Event("storage")); // ✅ แจ้งให้ Component อื่นรู้ว่ามีการเปลี่ยนแปลง
+        window.dispatchEvent(new Event("storage"));
         router.push("/login");
     };
 
     return (
-        <Box sx={{ display: "flex" }}>
-            {/* AppBar ด้านบน */}
+        <Box sx={{ display: "flex", backgroundColor: "white", minHeight: "100vh" }}>
             <AppBar
                 position="fixed"
                 sx={{
-                    background: "linear-gradient(135deg, #ff7000, #ff9900)",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                    background: "linear-gradient(236deg, #262626 11%, #4d4d4d 53%, #212121 93%)",
+                    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
                 }}
             >
                 <Toolbar>
-                    <IconButton
-                        sx={{ boxShadow: "none", width: "40px" }}
-                        edge="start"
-                        color="inherit"
-                        onClick={() => setOpen(true)}
-                    >
+                    <IconButton sx={{ color: "white" }} edge="start" onClick={() => setOpen(true)}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold" }}>
+                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold", color: "#f5f5f5" }}>
                         MACHINE BRISK
                     </Typography>
                 </Toolbar>
             </AppBar>
 
-            {/* Drawer Sidebar */}
             <Drawer
                 anchor="left"
                 open={open}
                 onClose={() => setOpen(false)}
-                sx={{ "& .MuiDrawer-paper": { width: 240 } }}
+                sx={{ "& .MuiDrawer-paper": { width: 260, backgroundColor: "#1f1f1f", color: "white" } }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        padding: "12px 16px",
-                        backgroundColor: "#ff7000",
-                        color: "white",
-                    }}
-                >
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px" }}>
                     <Typography variant="h6">เมนู</Typography>
-                    <IconButton sx={{ boxShadow: "none", width: "40px" }} onClick={() => setOpen(false)}>
+                    <IconButton sx={{ color: "white" }} onClick={() => setOpen(false)}>
                         <CloseIcon />
                     </IconButton>
                 </Box>
+                <Divider sx={{ backgroundColor: "#444" }} />
                 <List>
-                    {/* ✅ แสดง Dashboard */}
                     {defaultMenu.map((item, index) => (
                         <ListItem key={index} disablePadding>
-                            <ListItemButton
-                                onClick={() => {
-                                    router.push(item.path);
-                                    setOpen(false);
-                                }}
-                            >
-                                <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemButton onClick={() => { router.push(item.path); setOpen(false); }}>
+                                <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
                                 <ListItemText primary={item.text} />
                             </ListItemButton>
                         </ListItem>
                     ))}
-
-                    {/* ✅ แสดงปุ่ม Login เฉพาะตอนที่ยังไม่ได้เข้าสู่ระบบ */}
                     {!isAuthenticated && (
                         <ListItem disablePadding>
-                            <ListItemButton
-                                onClick={() => {
-                                    router.push("/login");
-                                    setOpen(false);
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <LoginIcon />
-                                </ListItemIcon>
+                            <ListItemButton onClick={() => { router.push("/login"); setOpen(false); }}>
+                                <ListItemIcon sx={{ color: "white" }}><LoginIcon /></ListItemIcon>
                                 <ListItemText primary="Login" />
                             </ListItemButton>
                         </ListItem>
                     )}
-
-                    {/* ✅ ถ้าล็อกอินแล้ว แสดงเมนูเพิ่ม */}
                     {isAuthenticated &&
                         authMenu.map((item, index) => (
                             <ListItem key={index} disablePadding>
-                                <ListItemButton
-                                    onClick={() => {
-                                        router.push(item.path);
-                                        setOpen(false);
-                                    }}
-                                >
-                                    <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemButton onClick={() => { router.push(item.path); setOpen(false); }}>
+                                    <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
                                     <ListItemText primary={item.text} />
                                 </ListItemButton>
                             </ListItem>
                         ))}
                 </List>
-
-                <Divider />
-
-                {/* ✅ แสดงปุ่ม Log Out ถ้าล็อกอินแล้ว */}
+                <Divider sx={{ backgroundColor: "#444" }} />
                 {isAuthenticated && (
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton
-                                onClick={handleLogout}
-                                sx={{
-                                    backgroundColor: "#d32f2f",
-                                    color: "white",
-                                    "&:hover": { backgroundColor: "#b71c1c" },
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <LogoutIcon />
-                                </ListItemIcon>
+                            <ListItemButton onClick={handleLogout} sx={{ backgroundColor: "#d32f2f", color: "white", "&:hover": { backgroundColor: "#b71c1c" } }}>
+                                <ListItemIcon sx={{ color: "white" }}><LogoutIcon /></ListItemIcon>
                                 <ListItemText primary="ออกจากระบบ" />
                             </ListItemButton>
                         </ListItem>
                     </List>
                 )}
             </Drawer>
-
-            {/* เนื้อหาหน้าเว็บ */}
-            <Box component="main" sx={{ flexGrow: 1, padding: "20px" }}>
+            <Box component="main" sx={{ flexGrow: 1, padding: "20px", color: "white" }}>
                 <Toolbar />
                 {children}
             </Box>

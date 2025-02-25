@@ -4,13 +4,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f1115;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ffffff;
-    --foreground: #000000;
+    --foreground: #0f1115;
   }
 }
 
@@ -19,6 +19,7 @@ body {
   background: var(--background);
   font-family: "TT Hoves Regular", sans-serif;
   font-weight: 300;
+ 
 }
 @font-face {
   font-family: "TT Hoves Bold";

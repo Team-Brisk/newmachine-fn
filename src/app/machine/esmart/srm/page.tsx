@@ -45,7 +45,7 @@ export default function SrmPage() {
             setTotalPages(response.data.totalPages);
             setFilterOptions(response.data.filter);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.log('Error fetching data:', error);
         }
     };
 
@@ -55,9 +55,8 @@ export default function SrmPage() {
 
     return (
         <Box sx={{
-            maxWidth: "1200px",
+            maxWidth: "1600px",
             margin: "0 auto",
-            padding: "20px",
             backgroundColor: "#fafafa",
             display: "flex",
             flexDirection: "column",
@@ -68,7 +67,7 @@ export default function SrmPage() {
             </Typography>
 
             {/* Filter Section */}
-            <Box sx={{ display: 'flex', gap: '20px', marginBottom: '30px', flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', gap: '20px', marginBottom: '30px', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {/* Date Filters */}
                 <Paper sx={{ padding: "20px", borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", width: "300px" }}>
                     <TextField
@@ -161,33 +160,75 @@ export default function SrmPage() {
             </Box>
 
             {/* Data Table */}
-            <TableContainer component={Paper} sx={{ marginBottom: '20px', borderRadius: '8px', boxShadow: 3, padding: '20px' }}>
+            <TableContainer
+                component={Paper}
+                sx={{
+                    marginBottom: '20px',
+                    borderRadius: '12px',
+                    boxShadow: 4,
+                    border: '1px solid #ddd',
+                }}
+            >
                 <Table>
                     <TableHead>
                         <TableRow sx={{ backgroundColor: "#f4f4f9" }}>
-                            <TableCell><b>Timestamp</b></TableCell>
-                            <TableCell><b>Start Position</b></TableCell>
-                            <TableCell><b>End Position</b></TableCell>
-                            <TableCell><b>Pre Bay</b></TableCell>
-                            <TableCell><b>Pre Level</b></TableCell>
-                            <TableCell><b>Job Status</b></TableCell>
-                            <TableCell><b>Run Pallet ID</b></TableCell>
-                            <TableCell><b>Status Description</b></TableCell>
-                            <TableCell><b>Command Description</b></TableCell>
+                            {[
+                                "Run Pallet ID",
+                                "Start Position",
+                                "End Position",
+                                "Pre Bay",
+                                "Pre Level",
+                                "Job Status",
+                                "X Current",
+                                "Y Current",
+                                "Z Current",
+                                "X Freq",
+                                "Y Freq",
+                                "Z Freq",
+                                "X",
+                                "Y",
+                                "Unit Types",
+                                "Status No",
+                                "Status Description",
+                                "Cmd No",
+                                "Command Description",
+                                "Timestamp",
+                            ].map((header, index) => (
+                                <TableCell key={index} sx={{ fontWeight: "bold", textAlign: "center", borderBottom: "2px solid #ccc" }}>
+                                    {header}
+                                </TableCell>
+                            ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {data.map((item, index) => (
-                            <TableRow key={index} hover>
-                                <TableCell>{item.timestamp}</TableCell>
-                                <TableCell>{item.startPos}</TableCell>
-                                <TableCell>{item.endPos}</TableCell>
-                                <TableCell>{item.preBay}</TableCell>
-                                <TableCell>{item.preLevel}</TableCell>
-                                <TableCell>{item.jobStatus}</TableCell>
-                                <TableCell>{item.run_palletId}</TableCell>
-                                <TableCell>{item.status_description}</TableCell>
-                                <TableCell>{item.command_description}</TableCell>
+                            <TableRow key={index} hover sx={{ '&:hover': { backgroundColor: "#f9f9f9" } }}>
+                                {[
+                                    item.run_palletId,
+                                    item.startPos,
+                                    item.endPos,
+                                    item.preBay,
+                                    item.preLevel,
+                                    item.jobStatus,
+                                    item.xCurrent,
+                                    item.yCurrent,
+                                    item.zCurrent,
+                                    item.xFreq,
+                                    item.yFreq,
+                                    item.zFreq,
+                                    item.x,
+                                    item.y,
+                                    item.unitTypes,
+                                    item.statusNo,
+                                    item.status_description,
+                                    item.cmdNo,
+                                    item.command_description,
+                                    item.timestamp,
+                                ].map((value, idx) => (
+                                    <TableCell key={idx} sx={{ textAlign: idx > 5 ? "center" : "left", borderBottom: "1px solid #ddd" }}>
+                                        {value}
+                                    </TableCell>
+                                ))}
                             </TableRow>
                         ))}
                     </TableBody>
@@ -202,8 +243,21 @@ export default function SrmPage() {
                     onChange={(e, value) => setPage(value)}
                     variant="outlined"
                     shape="rounded"
+                    sx={{
+                        "& .MuiPaginationItem-root": {
+                            color: "#1976d2",
+                            "&.Mui-selected": {
+                                backgroundColor: "#1976d2",
+                                color: "#fff",
+                            },
+                            "&:hover": {
+                                backgroundColor: "#f0f0f0",
+                            },
+                        },
+                    }}
                 />
             </Box>
+
         </Box>
     );
 }
