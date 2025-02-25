@@ -23,8 +23,5 @@ jobs:
             cd /root/cicd/newmachine-fn
             git pull origin main
             cd /root/cicd
-            docker-compose stop cicd-frontend
-            docker-compose rm -f cicd-frontend
-            docker rmi -f $(docker images -q cicd-frontend)
-            docker-compose build cicd-frontend
-            docker-compose up -d --no-deps cicd-frontend
+            docker compose build
+            docker compose up -d
