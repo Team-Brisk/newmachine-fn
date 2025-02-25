@@ -1,26 +1,26 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { 
-    Box, 
-    TextField, 
-    MenuItem, 
-    Select, 
-    InputLabel, 
-    FormControl, 
-    Pagination, 
-    Typography, 
-    Paper, 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableContainer, 
-    TableHead, 
-    TableRow 
+import {
+    Box,
+    TextField,
+    MenuItem,
+    Select,
+    InputLabel,
+    FormControl,
+    Pagination,
+    Typography,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
 } from '@mui/material';
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
-
+import { motion, AnimatePresence } from 'framer-motion';
 export default function ShuPage() {
     const [data, setData] = useState<any[]>([]);
     const [startDate, setStartDate] = useState<string>(moment().format('YYYY-MM-DD'));
@@ -70,21 +70,32 @@ export default function ShuPage() {
     }, [startDate, endDate, palletId, unitType, status, cmdNo, page]);
 
     return (
-        <Box sx={{
-            maxWidth: "1600px",
-            margin: "0 auto",
-            backgroundColor: "#fafafa",
-            display: "flex",
-            flexDirection: "column",
-        }}>
+        <Box component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            sx={{
+                maxWidth: "1600px",
+                margin: "0 auto",
+                backgroundColor: "#f4f4f9",
+                display: "flex",
+                flexDirection: "column",
+                padding: "30px 0",
+            }}>
             {/* Title */}
-            <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "center", marginBottom: "30px", color: "#333" }}>
-                SHU (Shuttle Car)
-            </Typography>
-
+            <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+                <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "center", marginBottom: "30px", color: "#333" }}>
+                    SHU (Shuttle Car)
+                </Typography>
+            </motion.div>
             {/* Filter Section */}
-            <Box sx={{ display: 'flex', gap: '20px', marginBottom: '30px', flexWrap: 'wrap', justifyContent:'center' }}>
-                <Paper sx={{ padding: "20px", borderRadius: "10px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", width: "300px" }}>
+            <Box sx={{ display: 'flex', gap: '20px', marginBottom: '30px', flexWrap: 'wrap', justifyContent: 'center' }}>
+
+                <Paper sx={{ padding: "20px", borderRadius: "12px", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)", width: "280px", background: "rgba(255, 255, 255, 0.7)", backdropFilter: "blur(8px)" }}>
                     <TextField
                         label="Start Date"
                         type="date"
@@ -173,7 +184,7 @@ export default function ShuPage() {
             </Box>
 
             {/* Data Table */}
-            <TableContainer component={Paper} sx={{ marginBottom: '20px', borderRadius: '8px', boxShadow: 3, padding: '20px' }}>
+            <TableContainer component={Paper} sx={{ marginBottom: '20px', borderRadius: '8px', boxShadow: 3, padding: '20px', overflowX: "auto" }}>
                 <Table>
                     <TableHead>
                         <TableRow sx={{ backgroundColor: "#f4f4f9" }}>
@@ -199,26 +210,32 @@ export default function ShuPage() {
                     </TableHead>
                     <TableBody>
                         {data.map((item, index) => (
-                            <TableRow key={index} hover>
-                                <TableCell>{item.timestamp}</TableCell>
-                                <TableCell>{item.palletId}</TableCell>
-                                <TableCell>{item.unitType}</TableCell>
-                                <TableCell>{item.weight}</TableCell>
-                                <TableCell>{item.location}</TableCell>
-                                <TableCell>{item.curLevel}</TableCell>
-                                <TableCell>{item.curBay}</TableCell>
-                                <TableCell>{item.curBank}</TableCell>
-                                <TableCell>{item.bay}</TableCell>
-                                <TableCell>{item.bank}</TableCell>
-                                <TableCell>{item.level}</TableCell>
-                                <TableCell>{item.rackType}</TableCell>
-                                <TableCell>{item.jobStatus}</TableCell>
-                                <TableCell>{item.x}</TableCell>
-                                <TableCell>{item.statusNo}</TableCell>
-                                <TableCell>{item.statusDescription}</TableCell>
-                                <TableCell>{item.cmdNo}</TableCell>
-                                <TableCell>{item.cmdDescription}</TableCell>
-                            </TableRow>
+                            // <motion.tr
+                            //     key={item}
+                            //     whileHover={{ scale: 1.02, backgroundColor: "#e3f2fd" }}
+                            //     style={{ cursor: "pointer" }}
+                            // >
+                                <TableRow key={index} hover>
+                                    <TableCell>{item.timestamp}</TableCell>
+                                    <TableCell>{item.palletId}</TableCell>
+                                    <TableCell>{item.unitType}</TableCell>
+                                    <TableCell>{item.weight}</TableCell>
+                                    <TableCell>{item.location}</TableCell>
+                                    <TableCell>{item.curLevel}</TableCell>
+                                    <TableCell>{item.curBay}</TableCell>
+                                    <TableCell>{item.curBank}</TableCell>
+                                    <TableCell>{item.bay}</TableCell>
+                                    <TableCell>{item.bank}</TableCell>
+                                    <TableCell>{item.level}</TableCell>
+                                    <TableCell>{item.rackType}</TableCell>
+                                    <TableCell>{item.jobStatus}</TableCell>
+                                    <TableCell>{item.x}</TableCell>
+                                    <TableCell>{item.statusNo}</TableCell>
+                                    <TableCell>{item.statusDescription}</TableCell>
+                                    <TableCell>{item.cmdNo}</TableCell>
+                                    <TableCell>{item.cmdDescription}</TableCell>
+                                </TableRow>
+                            // </motion.tr>
                         ))}
                     </TableBody>
                 </Table>

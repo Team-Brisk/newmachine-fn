@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Rotate from "./components/CycleOption";
 import ScrollTriggered from "./components/ScrollTriggered";
 import './styles/dashboard.css'
+import PathDrawing from "./components/PathDrawing";
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -50,7 +51,7 @@ export default function Home() {
           perspective: "1000px", // ให้ดูมีมิต
         }}>
 
-
+        
 
 
         <Box
@@ -127,6 +128,7 @@ export default function Home() {
           </Box>
           <ScrollTriggered />
         </Box>
+
       </Box>
     </>
   );

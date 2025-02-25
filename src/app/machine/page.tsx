@@ -103,8 +103,8 @@ export default function Machine() {
             }}
           >
             {[ 
-              { title: "SHU (Shuttle Car)", path: "/machine/esmart/shu", color: "#ff6f61" },
-              { title: "SRM (Crane)", path: "/machine/esmart/srm", color: "#6a5acd" },
+              { title: "SHU (Shuttle Car)", path: "/machine/esmart/shu", color: "#ff9e42" },
+              { title: "SRM (Crane)", path: "/machine/esmart/srm", color: "#5c5c5e" },
             ].map((machine, index) => (
               <motion.div
                 key={index}

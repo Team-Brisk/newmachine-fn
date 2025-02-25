@@ -60,16 +60,16 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
             <AppBar
                 position="fixed"
                 sx={{
-                    background: "linear-gradient(236deg, #262626 11%, #4d4d4d 53%, #212121 93%)",
-                    boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.3)",
+                    background: "linear-gradient(236deg, #ffffff 11%, #ffffff73 53%, #ffffff 93%)",
+                    boxShadow: "none",
                 }}
             >
                 <Toolbar>
-                    <IconButton sx={{ color: "white" }} edge="start" onClick={() => setOpen(true)}>
+                    <IconButton sx={{ color: "black" }} edge="start" onClick={() => setOpen(true)}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold", color: "#f5f5f5" }}>
-                        MACHINE BRISK
+                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "bold", color: "black" }}>
+                       BRISK
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -78,20 +78,20 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
                 anchor="left"
                 open={open}
                 onClose={() => setOpen(false)}
-                sx={{ "& .MuiDrawer-paper": { width: 260, backgroundColor: "#1f1f1f", color: "white" } }}
+                sx={{ "& .MuiDrawer-paper": { width: 260, backgroundColor: "linear-gradient(236deg, #ffffff 11%, #ffffff73 53%, #ffffff 93%)", color: "black" } }}
             >
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px" }}>
                     <Typography variant="h6">เมนู</Typography>
-                    <IconButton sx={{ color: "white" }} onClick={() => setOpen(false)}>
+                    <IconButton sx={{ color: "black" }} onClick={() => setOpen(false)}>
                         <CloseIcon />
                     </IconButton>
                 </Box>
-                <Divider sx={{ backgroundColor: "#444" }} />
+                <Divider sx={{ backgroundColor: "black" }} />
                 <List>
                     {defaultMenu.map((item, index) => (
                         <ListItem key={index} disablePadding>
                             <ListItemButton onClick={() => { router.push(item.path); setOpen(false); }}>
-                                <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
+                                <ListItemIcon sx={{ color: "black" }}>{item.icon}</ListItemIcon>
                                 <ListItemText primary={item.text} />
                             </ListItemButton>
                         </ListItem>
@@ -99,7 +99,7 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
                     {!isAuthenticated && (
                         <ListItem disablePadding>
                             <ListItemButton onClick={() => { router.push("/login"); setOpen(false); }}>
-                                <ListItemIcon sx={{ color: "white" }}><LoginIcon /></ListItemIcon>
+                                <ListItemIcon sx={{ color: "black" }}><LoginIcon /></ListItemIcon>
                                 <ListItemText primary="Login" />
                             </ListItemButton>
                         </ListItem>
@@ -108,7 +108,7 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
                         authMenu.map((item, index) => (
                             <ListItem key={index} disablePadding>
                                 <ListItemButton onClick={() => { router.push(item.path); setOpen(false); }}>
-                                    <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
+                                    <ListItemIcon sx={{ color: "black" }}>{item.icon}</ListItemIcon>
                                     <ListItemText primary={item.text} />
                                 </ListItemButton>
                             </ListItem>
@@ -118,8 +118,8 @@ export default function DrawerLayout({ children }: { children: React.ReactNode }
                 {isAuthenticated && (
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton onClick={handleLogout} sx={{ backgroundColor: "#d32f2f", color: "white", "&:hover": { backgroundColor: "#b71c1c" } }}>
-                                <ListItemIcon sx={{ color: "white" }}><LogoutIcon /></ListItemIcon>
+                            <ListItemButton onClick={handleLogout} sx={{ backgroundColor: "#ff9e42", fontFamily: "TT Hoves Regular", color: "black", "&:hover": { backgroundColor: "#b71c1c" } }}>
+                                <ListItemIcon sx={{ color: "black" }}><LogoutIcon /></ListItemIcon>
                                 <ListItemText primary="ออกจากระบบ" />
                             </ListItemButton>
                         </ListItem>
