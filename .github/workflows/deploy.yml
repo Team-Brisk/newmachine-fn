@@ -22,7 +22,7 @@ jobs:
           script: |
             cd /root/cicd/newmachine-fn
             git pull origin main
-            cd /home/root
+            cd /root/cicd
             docker-compose build frontend
             docker-compose up -d --no-deps frontend
  
