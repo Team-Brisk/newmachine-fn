@@ -1,12 +1,27 @@
-- name: Install sshpass
-  run: sudo apt-get update && sudo apt-get install -y sshpass
+name: Deploy Frontend to Server
 
-- name: SSH & Deploy with Password
-  run: |
-    sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << EOF
-      cd /root/cicd/newmachine-fn
-      git pull origin main
-      cd /root/cicd
-      docker compose build
-      docker compose up -d
-    EOF
+on:
+  push:
+    branches:
+      - main  # หรือเปลี่ยนเป็น branch ที่คุณใช้
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: SSH & Deploy with Password
+        run: |
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+            cd /root/cicd/newmachine-fn
+            git pull origin main
+            cd /root/cicd
+            docker compose build
+            docker compose up -d
+          EOF
