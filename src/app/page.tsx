@@ -110,7 +110,7 @@ export default function Home() {
                 fontSize: "2.25rem"
               }}
             >
-              sสวัสดี, {user?.name || "Guest"}
+              สวัสดี, {user?.name || "Guest"}
             </Typography>
 
           </motion.div>
