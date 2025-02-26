@@ -22,6 +22,7 @@ jobs:
             cd /root/cicd/newmachine-fn
             git pull origin main
             cd /root/cicd
-            docker compose build
-            docker compose up -d
+            docker compose pull frontend
+            docker compose build frontend
+            docker compose up -d frontend
           EOF
